@@ -1,61 +1,6 @@
 /logpot.csv
 /logpot.ods
-/bootloader/ds30 Loader/bin/ds30LoaderConsole.exe
-/bootloader/ds30 Loader/bin/ds30LoaderGui.exe
-/bootloader/ds30 Loader/documentation/ds30 Loader - console manual.pdf
-/bootloader/ds30 Loader/documentation/ds30 Loader - firmware manual.pdf
-/bootloader/ds30 Loader/documentation/ds30 Loader - gui manual.pdf
-/bootloader/ds30 Loader/documentation/ds30 Loader - main manual.pdf
-/bootloader/ds30 Loader/firmware_16-bit/copying.txt
-/bootloader/ds30 Loader/firmware_16-bit/ds30Loader.mcp
-/bootloader/ds30 Loader/firmware_16-bit/slackdsp_mini_bootloader.X/Makefile
-/bootloader/ds30 Loader/firmware_16-bit/slackdsp_mini_bootloader.X/build/default/production/_ext/1360937237/ds30loader.o
-/bootloader/ds30 Loader/firmware_16-bit/slackdsp_mini_bootloader.X/build/default/production/_ext/1360937237/ds30loader.o.d
-/bootloader/ds30 Loader/firmware_16-bit/slackdsp_mini_bootloader.X/dist/default/production/slackdsp_mini_bootloader.X.production.elf
-/bootloader/ds30 Loader/firmware_16-bit/slackdsp_mini_bootloader.X/dist/default/production/slackdsp_mini_bootloader.X.production.hex
-/bootloader/ds30 Loader/firmware_16-bit/slackdsp_mini_bootloader.X/dist/default/production/slackdsp_mini_bootloader.X.production.map
-/bootloader/ds30 Loader/firmware_16-bit/slackdsp_mini_bootloader.X/nbproject/Makefile-default.mk
-/bootloader/ds30 Loader/firmware_16-bit/slackdsp_mini_bootloader.X/nbproject/Makefile-genesis.properties
-/bootloader/ds30 Loader/firmware_16-bit/slackdsp_mini_bootloader.X/nbproject/Makefile-impl.mk
-/bootloader/ds30 Loader/firmware_16-bit/slackdsp_mini_bootloader.X/nbproject/Makefile-local-default.mk
-/bootloader/ds30 Loader/firmware_16-bit/slackdsp_mini_bootloader.X/nbproject/Makefile-variables.mk
-/bootloader/ds30 Loader/firmware_16-bit/slackdsp_mini_bootloader.X/nbproject/Package-default.bash
-/bootloader/ds30 Loader/firmware_16-bit/slackdsp_mini_bootloader.X/nbproject/configurations.xml
-/bootloader/ds30 Loader/firmware_16-bit/slackdsp_mini_bootloader.X/nbproject/private/configurations.xml
-/bootloader/ds30 Loader/firmware_16-bit/slackdsp_mini_bootloader.X/nbproject/private/private.properties
-/bootloader/ds30 Loader/firmware_16-bit/slackdsp_mini_bootloader.X/nbproject/private/private.xml
-/bootloader/ds30 Loader/firmware_16-bit/slackdsp_mini_bootloader.X/nbproject/project.properties
-/bootloader/ds30 Loader/firmware_16-bit/slackdsp_mini_bootloader.X/nbproject/project.xml
-/bootloader/ds30 Loader/firmware_16-bit/src/devices.inc
-/bootloader/ds30 Loader/firmware_16-bit/src/devices_PIC24F.inc
-/bootloader/ds30 Loader/firmware_16-bit/src/devices_PIC24FJ.inc
-/bootloader/ds30 Loader/firmware_16-bit/src/devices_PIC24HJ.inc
-/bootloader/ds30 Loader/firmware_16-bit/src/devices_dsPIC30F.inc
-/bootloader/ds30 Loader/firmware_16-bit/src/devices_dsPIC33FJ.inc
-/bootloader/ds30 Loader/firmware_16-bit/src/ds30loader.s
-/bootloader/ds30 Loader/firmware_16-bit/src/settings.inc
-/bootloader/ds30 Loader/firmware_16-bit/src/uart.inc
-/bootloader/ds30 Loader/firmware_16-bit/src/user_code.inc
-/bootloader/ds30 Loader/firmware_PIC12F_PIC16F/copying.txt
-/bootloader/ds30 Loader/firmware_PIC12F_PIC16F/ds30Loader.mcp
-/bootloader/ds30 Loader/firmware_PIC12F_PIC16F/src/devices.inc
-/bootloader/ds30 Loader/firmware_PIC12F_PIC16F/src/devices_PIC12F.inc
-/bootloader/ds30 Loader/firmware_PIC12F_PIC16F/src/devices_PIC16F.inc
-/bootloader/ds30 Loader/firmware_PIC12F_PIC16F/src/devices_PIC16F.inc.old
-/bootloader/ds30 Loader/firmware_PIC12F_PIC16F/src/ds30loader.asm
-/bootloader/ds30 Loader/firmware_PIC12F_PIC16F/src/settings.inc
-/bootloader/ds30 Loader/firmware_PIC12F_PIC16F/src/uart.inc
-/bootloader/ds30 Loader/firmware_PIC12F_PIC16F/src/user_code.inc
-/bootloader/ds30 Loader/firmware_PIC18F/copying.txt
-/bootloader/ds30 Loader/firmware_PIC18F/ds30Loader.mcp
-/bootloader/ds30 Loader/firmware_PIC18F/src/devices.inc
-/bootloader/ds30 Loader/firmware_PIC18F/src/devices_PIC18F.inc
-/bootloader/ds30 Loader/firmware_PIC18F/src/devices_PIC18FJ.inc
-/bootloader/ds30 Loader/firmware_PIC18F/src/ds30loader.asm
-/bootloader/ds30 Loader/firmware_PIC18F/src/settings.inc
-/bootloader/ds30 Loader/firmware_PIC18F/src/uart.inc
-/bootloader/ds30 Loader/firmware_PIC18F/src/user_code.inc
-/bootloader/ds30_Loader_140817.zip
+/bootloader/
 /kicad/Gerbers/drill_template.pdf
 /kicad/Gerbers/output.pdf
 /kicad/Gerbers/slackdspic-B_Cu.gbl
