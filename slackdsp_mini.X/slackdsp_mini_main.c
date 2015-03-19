@@ -1,5 +1,5 @@
 /*
- * File:   slackdsp_wolfson_main.c
+ * File:   slackdsp_mini_main.c
  * Author: Ian Maltby
  *
  * Created on December 7, 2014, 04:28 PM
@@ -61,7 +61,7 @@ int main(int argc, char** argv) {
     PLLFBD = 63; //M = 65
     CLKDIVbits.PLLPOST = 0; //N2 = 2
     while (!OSCCONbits.LOCK); //wait until PLL is locked
-    
+
     //Setup IO pins
     AD1PCFGL = 0xFFFF; //set all pins digital
     RPO24 = OC2_out; //RP24 (pin 4) = PWM CLOCKOUT
@@ -131,9 +131,9 @@ int main(int argc, char** argv) {
 
     //Initialise UART1
     U1MODE = 0; //Clear Uart 1 registers
-    U1STA = 0;  //to tidy up after bootloader
+    U1STA = 0; //to tidy up after bootloader
     U1RX_in = RPI1; //RP1 (pin 22) = RX
-    RPO0 = U1TX_out;//RP0 (pin 21) = TX
+    RPO0 = U1TX_out; //RP0 (pin 21) = TX
     U1BRG = 259; //set baud rate to 9600
     U1MODEbits.URXINV = 1; //invert RX polarity
     U1STAbits.UTXINV = 1; //invert TX polartity
@@ -174,7 +174,7 @@ int main(int argc, char** argv) {
     WM8510_write(additional_ctrl, 2); //32Khz sample rate
     WM8510_write(mono_mixer_ctrl, 1); //DAC to mono mixer
 
-          
+
     for (;;) {
 
         //do nothing
@@ -233,12 +233,13 @@ void __attribute__((interrupt, no_auto_psv)) _DCIInterrupt(void) {
 
     //sample = reso_filter(mulx(envelope, pot3)  , pot2, sample);
 
-  //  sample1 = mulx(pot1, pitchshift(8192,sample));
-   // sample2 = mulx(pot2, pitchshift2(32767, sample));
-   // sample = mulx(pot3, sample);
-  //  sample1 = add(sample1, sample2);
-  //  sample = add(sample, sample1);
-   
+    // sample1 = mulx(pot1, pitchshift(8192,sample));
+    // sample1 = lowpass(10632,sample1);
+    //  sample2 = mulx(pot2, pitchshift2(32767, sample));
+    // sample = mulx(pot3, sample);
+    // sample1 = add(sample1, sample2);
+    // sample = add(sample, sample1);
+
     sample1 = add(sample, mulx(pot1, sample1));
     sample1 = delayline(131072, pot3 << 2, 0, sample1);
     sample = blend(pot2, sample, sample1);
@@ -250,26 +251,26 @@ void __attribute__((interrupt, no_auto_psv)) _DCIInterrupt(void) {
     //sample = crossfade(pot2, sample, sample1);
     //sample = gain(pot1,pot2,sample);
     //sample = mulx(pot3, sample);
-    } 
+}
 
 //UART1 ISR
 
 void __attribute__((interrupt, no_auto_psv)) _U1RXInterrupt(void) {
 
-    const char version[] = "slackDSP mini\nBuilt: "__DATE__"\n";//ignore warning compiles OK
+    const char version[] = "slackDSP mini\nBuilt: "__DATE__"\n"; //ignore warning compiles OK
     const char *i;
 
     IFS0bits.U1RXIF = 0; //clear RX1 interrupt
-       
+
     if (U1RXREG == 123) //reset the PIC if "{" (ASCII 123) is received
         asm("reset");
 
-    if (U1RXREG == 118){
+    if (U1RXREG == 118) {
         i = version;
-        while(*i){
-         while(U1STAbits.UTXBF);
-         U1TXREG = *i;
-         i++;
-     }
+        while (*i) {
+            while (U1STAbits.UTXBF);
+            U1TXREG = *i;
+            i++;
+        }
     }
 } 
