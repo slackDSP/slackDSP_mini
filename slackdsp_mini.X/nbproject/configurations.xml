@@ -20,6 +20,7 @@
       <itemPath>WM8510.c</itemPath>
       <itemPath>slackdsp_mini.c</itemPath>
       <itemPath>sram.c</itemPath>
+      <itemPath>effect_examples.txt</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

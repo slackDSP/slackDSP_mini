@@ -227,30 +227,11 @@ void __attribute__((interrupt, no_auto_psv)) _DCIInterrupt(void) {
 
     sample = adc;
 
+/*Effect code start*/
+    sample = revdelay(131072, pot3 << 2, sample);
 
-
-
-
-    //sample = reso_filter(mulx(envelope, pot3)  , pot2, sample);
-
-    // sample1 = mulx(pot1, pitchshift(8192,sample));
-    // sample1 = lowpass(10632,sample1);
-    //  sample2 = mulx(pot2, pitchshift2(32767, sample));
-    // sample = mulx(pot3, sample);
-    // sample1 = add(sample1, sample2);
-    // sample = add(sample, sample1);
-
-    sample1 = add(sample, mulx(pot1, sample1));
-    sample1 = delayline(131072, pot3 << 2, 0, sample1);
-    sample = blend(pot2, sample, sample1);
-    //sample = add(sample, sample1);
-    //sample = vco(16000); //generate test tone
-    //sample = pitchshift(16384 + (tri_lfo(pot3)>> 4), sample);
-
-    //sample = mulx(tri_lfo(logpot(pot3)),sample);
-    //sample = crossfade(pot2, sample, sample1);
-    //sample = gain(pot1,pot2,sample);
-    //sample = mulx(pot3, sample);
+/*Effect code end*/
+       
 }
 
 //UART1 ISR

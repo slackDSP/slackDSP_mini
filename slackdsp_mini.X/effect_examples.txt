@@ -1,0 +1,60 @@
+Dual pitch shifter
+Pot 1: pitch 1
+Pot 2: pitch 2
+Pot 3: dry/wet blend
+
+Intervals -1 Octave, -m7th, -M6th, -5th, -4th, -M3rd, -M2nd, Off, +m2nd, +M2nd, +M3rd, +4th, +5th, +M6th, +m7th, +1 Octave
+
+Code:
+const int pitches[16] = {8192, 9195, 9741, 10935, 12274, 13003, 14596, 0, 17358, 18390, 20642, 21870, 24548, 27554, 29192, 32767};
+
+sample1 = pitchshift(pitches[pot1 >> 11], sample);
+sample2 = pitchshift2(pitches[pot2 >> 11], sample);
+sample = blend(pot3, sample, add(sample1, sample2));
+
+Sample and hold low pass filter
+Pot 1: range
+Pot 2: resonance
+Pot 3: speed
+
+Code:
+sample = svf((random_lfo(pot3)>> 1) + (pot1 >> 1), pot2, lp, sample);
+
+Octaver
+Pot 1: -1 Octave level
+Pot 2: +1 Octave level
+Pot 3: dry level
+
+Code:
+sample1 = mulx(pot1, pitchshift(8192, sample));
+sample1 = lowpass(10632, sample1);
+sample2 = mulx(pot2, pitchshift2(32767, sample));
+sample = mulx(pot3, sample);
+sample1 = add(sample1, sample2);
+sample = add(sample, sample1);
+
+Two second delay
+Pot 1: Feedback
+Pot 2: Dry/wet blend
+Pot 3: Delay time
+
+Code:
+sample1 = add(sample, mulx(pot1, sample1));
+sample1 = delayline(131072, pot3 << 2, 0, sample1);
+sample = blend(pot2, sample, sample1);
+
+Simple ring modulator
+Pot 1:
+Pot 2:
+Pot 3: Frequency
+
+Code:
+sample = mulx(vco(logpot(pot3)),sample);
+
+2 second reverse delay line
+Pot 1:
+Pot 2:
+Pot 3: Delay time
+
+Code:
+sample = revdelay(131072, pot3 << 2, sample);
