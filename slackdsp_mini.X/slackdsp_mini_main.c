@@ -228,7 +228,7 @@ void __attribute__((interrupt, no_auto_psv)) _DCIInterrupt(void) {
     sample = adc;
 
 /*Effect code start*/
-    sample = revdelay(131072, pot3 << 2, sample);
+sample = revdelay(131072, pot3 << 2, sample);
 
 /*Effect code end*/
        
@@ -238,7 +238,7 @@ void __attribute__((interrupt, no_auto_psv)) _DCIInterrupt(void) {
 
 void __attribute__((interrupt, no_auto_psv)) _U1RXInterrupt(void) {
 
-    const char version[] = "slackDSP mini\nBuilt: "__DATE__"\n"; //ignore warning compiles OK
+    const char version[] = "slackDSP mini ("codename")\nBuilt: "__DATE__"\n"; //ignore warning compiles OK
     const char *i;
 
     IFS0bits.U1RXIF = 0; //clear RX1 interrupt

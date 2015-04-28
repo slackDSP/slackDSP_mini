@@ -8,6 +8,8 @@
 #ifndef SLACKDSP_MINI_H
 #define	SLACKDSP_MINI_H
 
+#define codename "Laura"
+
 //Define nice pin names
 
 #define LED LATBbits.LATB14 //LED1 output
