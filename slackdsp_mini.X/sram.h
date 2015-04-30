@@ -1,8 +1,10 @@
 /* 
  * File:   sram.h
- * Author: Ian Maltby
  *
- * Created on December 11, 2014, 10:14 PM
+ *   Copyright © 2015 Ian Maltby
+ * This work is free. You can redistribute it and/or modify it under the
+ * terms of the Do What The Fuck You Want To Public License, Version 2,
+ * as published by Sam Hocevar. See the COPYING file for more details.*
  */
 
 #ifndef SRAM_H
