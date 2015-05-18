@@ -231,7 +231,55 @@ void __attribute__((interrupt, no_auto_psv)) _DCIInterrupt(void) {
     sample = adc;
 
     /*Effect code start*/
-    sample = revdelay(131072, pot3 << 2, sample);
+
+    int mode = 0;
+
+    mode = pot3 >> 12;
+
+    if (mode == 0)
+
+        sample = adc;
+
+    if (mode == 1) {
+
+        sample1 = add(sample, mulx(logpot(pot2), sample1));
+        sample1 = delayline(131072, pot1 << 2, 0, sample1);
+        sample = add(sample, mulx(pot2, sample1));
+
+    }
+
+    if (mode == 2) {
+
+        sample1 = pitchshift(8192, sample);
+        sample1 = lowpass(10632, sample1);
+        sample2 = pitchshift2(32767, sample);
+        sample1 = blend(pot1, sample1, sample2);
+        sample = blend(pot2, sample, sample1);
+
+    }
+
+    if (mode == 3) {
+
+        sample = svf((random_lfo(pot1) >> 1) + 2000, pot2, lp, sample);
+
+    }
+
+    if (mode == 4) {
+
+        sample1 = mulx(vco(logpot(pot1)), sample);
+        sample = blend(pot2, sample, sample1);
+
+    }
+
+     if (mode == 5) {
+
+       sample1 = revdelay(131072, pot1 << 2, sample);
+        sample = blend(pot2, sample, sample1);
+
+    }
+
+    if(mode > 5)
+        sample = 0;
 
     /*Effect code end*/
 

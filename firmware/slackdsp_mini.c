@@ -253,7 +253,7 @@ int saw_lfo(int saw_speed) {
 int tri_lfo(int tri_speed) {
 
     static long tri_counter = 0;
-    static long int tri = 0;
+    static long tri = 0;
     int tri_out = 0;
 
     tri_counter = tri_counter + tri_speed;
@@ -262,7 +262,8 @@ int tri_lfo(int tri_speed) {
         tri = (tri + 64) & 65535;
     }
     tri_out = tri - 32767;
-    tri_out = abs(tri_out);
+    if (tri_out < 0)
+        tri_out = ~tri_out;
 
     return (tri_out);
 
@@ -275,7 +276,7 @@ int logpot(int logpot_in) {
 }
 
 //State Variable Filter
-//http://www.musicdsp.org/showone.php?id=142
+//http://www.musicdsp.org/showArchiveComment.php?ArchiveID=142
 
 int svf(int svf_freq, int svf_q, int svf_type, int svf_in) {
 
@@ -366,7 +367,7 @@ int random_lfo(int random_speed) {
 }
 
 //envelope follower
-//http://www.musicdsp.org/showone.php?id=136
+//http://www.musicdsp.org/archive.php?classid=0#136
 
 int envelope(int env_attack, int env_release, int env_in) {
 

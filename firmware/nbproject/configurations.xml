@@ -36,7 +36,7 @@
         <targetDevice>dsPIC33FJ128GP804</targetDevice>
         <targetHeader></targetHeader>
         <targetPluginBoard></targetPluginBoard>
-        <platformTool>PICkit2PlatformTool</platformTool>
+        <platformTool>Simulator</platformTool>
         <languageToolchain>XC16</languageToolchain>
         <languageToolchainVersion>1.24</languageToolchainVersion>
         <platform>2</platform>
@@ -180,13 +180,6 @@
         <property key="relaxed-math" value="false"/>
         <property key="save-temps" value="false"/>
       </C30Global>
-      <PICkit2PlatformTool>
-        <property key="pk2settings.3state" value="false"/>
-        <property key="pk2settings.preserveee" value="false"/>
-        <property key="pk2settings.setvddvoltage" value="3.25"/>
-        <property key="pk2settings.userpgmexec" value="true"/>
-        <property key="pk2settings.usetargetpower" value="false"/>
-      </PICkit2PlatformTool>
     </conf>
   </confs>
 </configurationDescriptor>
