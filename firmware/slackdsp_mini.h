@@ -51,4 +51,6 @@ int revdelay(long rd_length, long rd_time, int rd_in);
 int blend(int b_ctrl, int b_in_1, int b_in_2);
 int random_lfo(int random_speed);
 int envelope(int env_attack, int env_release, int env_in);
+int hyper_tri_lfo(long hpt_speed);
+void serial_send(int s_out);
 #endif	/* SLACKDSP_WOLFSON_H */

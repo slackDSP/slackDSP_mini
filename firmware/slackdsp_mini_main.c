@@ -236,9 +236,11 @@ void __attribute__((interrupt, no_auto_psv)) _DCIInterrupt(void) {
 
     mode = pot3 >> 12;
 
-    if (mode == 0)
+    if (mode == 0) {
 
-        sample = adc;
+        sample = sample;
+
+    }
 
     if (mode == 1) {
 
@@ -266,20 +268,42 @@ void __attribute__((interrupt, no_auto_psv)) _DCIInterrupt(void) {
 
     if (mode == 4) {
 
-        sample1 = mulx(vco(logpot(pot1)), sample);
+        sample1 = mulx(vco(logpot(pot1) >> 2), sample);
         sample = blend(pot2, sample, sample1);
 
     }
 
-     if (mode == 5) {
+    if (mode == 5) {
 
-       sample1 = revdelay(131072, pot1 << 2, sample);
+        sample1 = revdelay(131072, pot1 << 2, sample);
         sample = blend(pot2, sample, sample1);
 
     }
 
-    if(mode > 5)
-        sample = 0;
+    if (mode == 6) {
+
+#define long_flange 1024
+#define short_flange 40
+#define flange_range 800
+        static int feedback = 0;
+
+        sample1 = add(sample, mulx(feedback, 30000));
+        sample1 = delayline(long_flange, short_flange + mulx(hyper_tri_lfo(logpot(pot1)), flange_range), 0, sample1);
+        feedback = mulx((pot2 - 16384) << 1, sample1);
+        sample = add(sample, sample1);
+
+    }
+
+    if (mode == 7) {
+
+        int scale[8] = {16384, 18390, 20642, 21870, 24548, 27554, 30928, 32767};
+        static int pitch = 0;
+
+        pitch = random_lfo(pot1) >> 12;
+        sample1 = pitchshift(scale[pitch], sample);
+        sample = blend(pot2, sample, sample1);
+
+    }
 
     /*Effect code end*/
 
