@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date Tue 23 Dec 2014 08:42:44 PM GMT
+EESchema Schematic File Version 2  date Sun 31 May 2015 14:10:44 BST
 LIBS:power
 LIBS:device
 LIBS:transistors
@@ -30,17 +30,17 @@ LIBS:atmel
 LIBS:contrib
 LIBS:valves
 LIBS:slackDSP
-LIBS:slackdspic-cache
+LIBS:slackdsp_mini-cache
 EELAYER 27 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
 Sheet 1 1
-Title "slackdspic"
+Title "slackDSP mini"
 Date "27 nov 2014"
 Rev "1"
 Comp "slackDSP"
-Comment1 ""
+Comment1 "© Ian Maltby 2014"
 Comment2 ""
 Comment3 ""
 Comment4 ""
