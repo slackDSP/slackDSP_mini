@@ -104,7 +104,7 @@ int main(int argc, char** argv) {
     //DCICON1bits.DLOOP = 1; //loopback
 
     //Initialise output compare module 1 for PWM output (CLOCKOUT)
-    OC1CONbits.OCM = 0; //disble module
+    OC1CONbits.OCM = 0; //disable module
     OC1R = 2; //default duty cycle
     OC1CONbits.OCTSEL = 0; //Select timer 2 as time base
     OC1CONbits.OCM = 0b110; //Select output mode PWM
@@ -152,7 +152,7 @@ int main(int argc, char** argv) {
     LED = 1;
 
     WM8510_init(); //initialise WM8510 port
-    sram_init(seq); //initilise 23LC1024 in sequential mode
+    sram_init(seq); //initialise 23LC1024 in sequential mode
 
     //Configure WM8510
     WM8510_write(software_reset, 0); //reset
@@ -161,7 +161,7 @@ int main(int argc, char** argv) {
     WM8510_write(power_mngmnt3, 137); //mono out on, mono mixer on, DAC on
     WM8510_write(input_ctrl, 8); //mic2 = mixer
 
-    //PLL setup to generate 8.192Mhz clock for 32kHz sample rate
+    //PLL setup to generate 8.192MHz clock for 32kHz sample rate
     WM8510_write(pll_n, 9); //PLL n = 9
     WM8510_write(pll_k1, 53);
     WM8510_write(pll_k2, 74);
@@ -172,9 +172,9 @@ int main(int argc, char** argv) {
     WM8510_write(audio_interface, 208); //frame clock inverted, word length 24bits, I2S format
     WM8510_write(adc_boost_ctrl, 5); //input boost 0dB
     // WM8510_write(companding_ctrl, 1); //Loopback
-    WM8510_write(dac_control, 24); //32khz de-emphasis, 128x DAC oversample
+    WM8510_write(dac_control, 24); //32kHz de-emphasis, 128x DAC oversample
     WM8510_write(adc_control, 264); //hipass on (removes any audio DC offset), 128x ADC oversample
-    WM8510_write(additional_ctrl, 2); //32Khz sample rate
+    WM8510_write(additional_ctrl, 2); //32KHz sample rate
     WM8510_write(mono_mixer_ctrl, 1); //DAC to mono mixer
 
 
@@ -318,10 +318,10 @@ void __attribute__((interrupt, no_auto_psv)) _U1RXInterrupt(void) {
 
     IFS0bits.U1RXIF = 0; //clear RX1 interrupt
 
-    if (U1RXREG == 123) //reset the PIC if "{" (ASCII 123) is received
+    if (U1RXREG == 'r' ) //reset the PIC if "r" is received
         asm("reset");
 
-    if (U1RXREG == 118) {
+    if (U1RXREG == 'v') { //print version info if "v" is received
         i = version;
         while (*i) {
             while (U1STAbits.UTXBF);
