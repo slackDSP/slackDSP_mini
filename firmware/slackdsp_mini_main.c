@@ -238,7 +238,66 @@ void __attribute__((interrupt, no_auto_psv)) _DCIInterrupt(void) {
 
     if (mode == 0) {
 
-        sample = sample;
+        int apcoeff = 0;
+        static long ap1old = 0;
+        static long ap1new = 0;
+        static long ap2old = 0;
+        static long ap2new = 0;
+        static long ap3old = 0;
+        static long ap3new = 0;
+        static long ap4old = 0;
+        static long ap4new = 0;
+        static long ap5old = 0;
+        static long ap5new = 0;
+        static long ap6old = 0;
+        static long ap6new = 0;
+        static long ap7old = 0;
+        static long ap7new = 0;
+        static long ap8old = 0;
+        static long ap8new = 0;
+        static int pfeedback;
+
+        apcoeff = 9216 + mulx(tri_lfo(logpot(pot1)), 15488);
+
+        //serial_send(pot2, 16000);
+
+        sample1 = add(sample, mulx(pfeedback,30000));
+
+        ap1new = ((ap1old * apcoeff) >> 15) + sample1;
+        sample1 = ((ap1new * -apcoeff) >> 15) + ap1old;
+        ap1old = ap1new;
+
+        ap2new = ((ap2old * apcoeff) >> 15) + sample1;
+        sample1 = ((ap2new * -apcoeff) >> 15) + ap2old;
+        ap2old = ap2new;
+
+        ap3new = ((ap3old * apcoeff) >> 15) + sample1;
+        sample1 = ((ap3new * -apcoeff) >> 15) + ap3old;
+        ap3old = ap3new;
+
+        ap4new = ((ap4old * apcoeff) >> 15) + sample1;
+        sample1 = ((ap4new * -apcoeff) >> 15) + ap4old;
+        ap4old = ap4new;
+
+        ap5new = ((ap5old * apcoeff) >> 15) + sample1;
+        sample1 = ((ap5new * -apcoeff) >> 15) + ap5old;
+        ap5old = ap5new;
+
+        ap6new = ((ap6old * apcoeff) >> 15) + sample1;
+        sample1 = ((ap6new * -apcoeff) >> 15) + ap6old;
+        ap6old = ap6new;
+
+        ap7new = ((ap7old * apcoeff) >> 15) + sample1;
+        sample1 = ((ap7new * -apcoeff) >> 15) + ap7old;
+        ap7old = ap7new;
+
+        ap8new = ((ap8old * apcoeff) >> 15) + sample1;
+        sample1 = ((ap8new * -apcoeff) >> 15) + ap8old;
+        ap8old = ap8new;
+        
+        pfeedback = mulx((pot2 - 16384) << 1, sample1);
+        
+        sample = add(sample, sample1);
 
     }
 
@@ -296,17 +355,16 @@ void __attribute__((interrupt, no_auto_psv)) _DCIInterrupt(void) {
 
     if (mode == 7) {
 
-        int scale[8] = {16384, 18390, 20642, 21870, 24548, 27554, 30928, 32767};
-        static int pitch = 0;
+       int scale[8] = {16384, 18390, 20642, 21870, 24548, 27554, 30928, 32767};
+      static int pitch = 0;
 
         pitch = random_lfo(pot1) >> 12;
         sample1 = pitchshift(scale[pitch], sample);
         sample = blend(pot2, sample, sample1);
-
+        
     }
 
     /*Effect code end*/
-
 }
 
 //UART1 ISR
@@ -318,7 +376,7 @@ void __attribute__((interrupt, no_auto_psv)) _U1RXInterrupt(void) {
 
     IFS0bits.U1RXIF = 0; //clear RX1 interrupt
 
-    if (U1RXREG == 'r' ) //reset the PIC if "r" is received
+    if (U1RXREG == 'r') //reset the PIC if "r" is received
         asm("reset");
 
     if (U1RXREG == 'v') { //print version info if "v" is received

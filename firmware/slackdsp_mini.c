@@ -402,15 +402,15 @@ int hyper_tri_lfo(long hpt_speed) {
     return (hypertri[pos]);
 }
 
-//serial_send - sends a 16 bit int to the serial port once per second
+//serial_send - sends a 16 bit int to the serial port
 
-void serial_send(int s_out) {
+void serial_send(int s_out, int s_delay) {
 
     static int serial_delay = 0;
 
     serial_delay = serial_delay + 1;
 
-    if (serial_delay == 32000) {
+    if (serial_delay >= s_delay) {
         serial_delay = 0;
         U1TXREG = s_out >> 8;
         U1TXREG = s_out;

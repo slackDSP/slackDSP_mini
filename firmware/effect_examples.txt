@@ -120,3 +120,47 @@ Code:
     sample = mulx(tri_out, sample);
 
     sample = blend(pot2, sample1, sample);
+
+Reverb
+
+static int delay0[4096];
+    static int delay1[1024];
+    static int delay2[512];
+    static int delay3[128];
+
+    static int delay0_in = 0;
+    static int delay1_in = 0;
+    static int delay2_in = 0;
+    static int delay3_in = 0;
+    int feedback = 0;
+    int delay0_out = 0;
+    int delay1_out = 0;
+    int delay2_out = 0;
+    int delay3_out = 0;
+    static int delay_writeaddress = 0;
+
+    delay_writeaddress++;
+
+    feedback = (sample >> 3) + mulx(pot1, crossfade(pot3, sample1,pitchshift(32767,sample1)));
+
+    delay0_out = delay0[(delay_writeaddress + 4096 - 3299) & 4095];
+    delay0_in = (delay0_out >> 1) + feedback;
+    delay0[delay_writeaddress & 4095] = delay0_in;
+    sample1 = delay0_out - (delay0_in >> 1);
+
+    delay1_out = delay1[(delay_writeaddress + 1024 - 991) & 1023];
+    delay1_in = (delay1_out >> 1) + sample1;
+    delay1[delay_writeaddress & 1023] = delay1_in;
+    sample1 = delay1_out - (delay1_in >> 1);
+
+    delay2_out = delay2[(delay_writeaddress + 512 - 353) & 511];
+    delay2_in = (delay2_out >> 1) + sample1;
+    delay2[delay_writeaddress & 511] = delay2_in;
+    sample1 = delay2_out - (delay2_in >> 1);
+
+    delay3_out = delay3[(delay_writeaddress + 128 - 97) & 127];
+    delay3_in = (delay3_out >> 1) + sample1;
+    delay3[delay_writeaddress & 127] = delay3_in;
+    sample1 = delay3_out - (delay3_in >> 1);
+
+    sample = blend(pot2, sample, (sample1 << 3));
