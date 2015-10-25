@@ -2,6 +2,8 @@
 
 ![](www/mini_guts.jpg)
 
+YouTube demo video
+
 [![YouTube demo video](http://img.youtube.com/vi/F_a12EcQlmA/0.jpg)](http://www.youtube.com/watch?v=F_a12EcQlmA)
 
 Nothing to see here yet....
